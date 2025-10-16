@@ -1595,8 +1595,8 @@ micro_wake_word:
     - model: includes/hey_beemo.json
     - model: hey_jarvis
       id: hey_jarvis
-#    - model: hey_mycroft
-#      id: hey_mycroft
+    - model: hey_mycroft
+      id: hey_mycroft
     - model: https://github.com/kahrendt/microWakeWord/releases/download/stop/stop.json
       id: stop
       internal: true
