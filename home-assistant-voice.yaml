@@ -1592,7 +1592,7 @@ micro_wake_word:
   models:
     - model: 
       id: okay_nabu
-    - model: https://raw.githubusercontent.com/1liminal1/xiaozhi-esphome/refs/heads/main/MicroWakeWords/models/BMO/hey_beemo.json
+    - model: "https://raw.githubusercontent.com/1liminal1/xiaozhi-esphome/refs/heads/main/MicroWakeWords/models/BMO/hey_beemo.json"
       id: hey_beemo
     - model: hey_jarvis
       id: hey_jarvis
