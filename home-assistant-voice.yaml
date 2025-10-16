@@ -1590,7 +1590,7 @@ micro_wake_word:
     gain_factor: 4
   stop_after_detection: false
   models:
-    - model: 
+    - model: https://github.com/kahrendt/microWakeWord/releases/download/okay_nabu_20241226.3/okay_nabu.json
       id: okay_nabu
     - model: https://raw.githubusercontent.com/1liminal1/xiaozhi-esphome/refs/heads/main/MicroWakeWords/models/BMO/hey_beemo.json
     - model: hey_jarvis
