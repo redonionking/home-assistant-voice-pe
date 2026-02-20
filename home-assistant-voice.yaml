@@ -1371,30 +1371,25 @@ script:
   - id: fetch_first_active_timer
     then:
       - lambda: |
-          const auto timers = id(va).get_timers();
-          auto output_timer = timers.begin()->second;
-          for (auto &iterable_timer : timers) {
-            if (iterable_timer.second.is_active && iterable_timer.second.seconds_left <= output_timer.seconds_left) {
-              output_timer = iterable_timer.second;
-            }
-          }
-          id(first_active_timer) = output_timer;
+          auto timers = id(v_assistant).get_timers();
+          if (!timers.empty()) {
+            auto output_timer = timers[0];
+            bool any_active = false;
 
-  # Script used to check if a timer is active (Stored in global is_timer_active)
-  - id: check_if_timers_active
-    then:
-      - lambda: |
-          const auto timers = id(va).get_timers();
-          bool output = false;
-          if (timers.size() > 0) {
             for (auto &iterable_timer : timers) {
-              if(iterable_timer.second.is_active) {
-                output = true;
+              if (iterable_timer.is_active) {
+                any_active = true;
+                if (iterable_timer.seconds_left <= output_timer.seconds_left || !output_timer.is_active) {
+                  output_timer = iterable_timer;
+                }
               }
             }
+            
+            // Set your global or helper variables here
+            id(is_timer_active).publish_state(any_active);
+            // Example: update a sensor with the remaining seconds
+            // id(timer_seconds_remaining).publish_state(output_timer.seconds_left);
           }
-          id(is_timer_active) = output;
-
   # Script used activate the stop word if the TTS step is long.
   # Why is this wrapped on a script?
   #   Becasue we want to stop the sequence if the TTS step is faster than that.
